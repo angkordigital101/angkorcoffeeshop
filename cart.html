@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Bag & Cart | Angkor Coffee Roasters</title>
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .cart-page-layout {
+      display: grid;
+      grid-template-columns: 1.4fr 0.8fr;
+      gap: 3rem;
+      padding: 3.5rem 0 5rem;
+    }
+
+    .cart-items-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(200, 138, 75, 0.16);
+    }
+
+    .cart-items-table th {
+      background: #faf6f1;
+      padding: 1.1rem 1.25rem;
+      text-align: left;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--coffee-700);
+      border-bottom: 1px solid #ebe2d7;
+    }
+
+    .cart-items-table td {
+      padding: 1.25rem;
+      border-bottom: 1px solid #f2ece4;
+      vertical-align: middle;
+    }
+
+    .cart-row-product {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+    }
+
+    .cart-row-img {
+      width: 80px;
+      height: 80px;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
+      border: 1px solid #e5dcce;
+    }
+
+    .cart-order-summary-box {
+      background: #ffffff;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--coffee-border);
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      height: fit-content;
+      position: sticky;
+      top: 90px;
+    }
+
+    .cart-order-summary-box h3 {
+      font-size: 1.35rem;
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid #f0e8de;
+      padding-bottom: 0.85rem;
+    }
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+      color: var(--coffee-text-muted);
+    }
+
+    .summary-line.total {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--coffee-900);
+      border-top: 1px dashed #dcd3c8;
+      padding-top: 1rem;
+      margin-top: 1rem;
+    }
+
+    .quick-coupons-strip {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .quick-coupon-pill {
+      font-size: 0.72rem;
+      background: #fbf6ef;
+      border: 1px dashed var(--coffee-gold);
+      color: var(--coffee-gold-hover);
+      padding: 3px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    @media (max-width: 992px) {
+      .cart-page-layout {
+        grid-template-columns: 1fr;
+      }
+      .cart-order-summary-box {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar">
+    <div class="container announcement-inner">
+      <div class="announcement-msg">
+        <i class="fa-solid fa-fire text-gold"></i>
+        <span><strong>Fresh Roast Guarantee:</strong> Roasted within 48h of dispatch</span>
+      </div>
+      <div class="announcement-actions">
+        <div class="currency-switcher">
+          <span style="font-size: 0.75rem;">Currency:</span>
+          <button class="currency-toggle-btn active" data-currency="USD">USD ($)</button>
+          <button class="currency-toggle-btn" data-currency="KHR">KHR (៛)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon-wrap"><i class="fa-solid fa-mug-hot"></i></div>
+        <div class="brand-text">
+          <span class="brand-title">ANGKOR <span>COFFEE</span></span>
+          <span class="brand-tagline">Artisan Roastery • Cambodia</span>
+        </div>
+      </a>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="shop.html" class="nav-link">Shop Roasts</a>
+        <a href="index.html#roastingRitual" class="nav-link">Our Roast Ritual</a>
+        <a href="index.html#quizSection" class="nav-link">Flavor Quiz</a>
+        <a href="story.html" class="nav-link">Our Story</a>
+        <a href="contact.html" class="nav-link">Tasting Room</a>
+      </nav>
+
+      <div class="header-utilities">
+        <div class="cart-btn-wrap">
+          <button class="header-icon-btn open-cart-btn" title="View Bag">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span class="cart-badge">0</span>
+          </button>
+        </div>
+        <button class="mobile-toggle-btn" id="mobileNavToggle"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Cart Container -->
+  <main class="container">
+    <div style="padding-top: 2.5rem;">
+      <h1 class="section-title">Your Roasted Coffee Bag</h1>
+      <p style="color: var(--coffee-text-muted);">Review your fresh roasts before entering secure roastery dispatch.</p>
+    </div>
+
+    <!-- Free Shipping Progress -->
+    <div class="free-shipping-progress" id="cartPageShippingProgress" style="margin-top: 1.5rem; border-radius: var(--radius-md); border: 1px solid #eae2d8;"></div>
+
+    <div class="cart-page-layout">
+      <!-- Items Container -->
+      <section>
+        <div id="cartPageItemsContainer">
+          <!-- Rendered dynamically -->
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+          <a href="shop.html" class="btn btn-outline">
+            <i class="fa-solid fa-arrow-left"></i> Continue Shopping
+          </a>
+          <button class="btn btn-outline-sm" onclick="handleClearCartPrompt()">
+            <i class="fa-solid fa-trash-can"></i> Clear Whole Bag
+          </button>
+        </div>
+
+        <!-- Special Roaster Note -->
+        <div style="background: #ffffff; border: 1px solid #ebe2d7; border-radius: var(--radius-md); padding: 1.5rem; margin-top: 2rem;">
+          <h4 style="margin-bottom: 0.5rem; font-size: 1.05rem;"><i class="fa-regular fa-comment-dots text-gold"></i> Special Roasting Note or Gift Message:</h4>
+          <textarea placeholder="e.g., Please grind extra fine for a Flair 58 espresso, or write 'Happy Birthday Sok' on the bag label..." rows="3" style="width: 100%; border: 1px solid #d9d1c9; border-radius: var(--radius-sm); padding: 0.75rem; font-size: 0.88rem;"></textarea>
+        </div>
+      </section>
+
+      <!-- Order Summary -->
+      <aside class="cart-order-summary-box">
+        <h3>Order Summary</h3>
+
+        <!-- Coupon input -->
+        <div style="margin-bottom: 1.5rem;">
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--coffee-700); margin-bottom: 0.35rem;">Promo / Voucher Code:</label>
+          <div style="display: flex; gap: 0.5rem;">
+            <input type="text" id="cartPageCouponInput" placeholder="Code (e.g. ANGKOR10)" style="flex: 1; padding: 0.6rem 0.85rem; border: 1px solid #dcd3c8; border-radius: var(--radius-sm); text-transform: uppercase; font-size: 0.85rem;">
+            <button type="button" class="btn btn-secondary" onclick="applyCartPageCoupon()">Apply</button>
+          </div>
+          <div class="quick-coupons-strip">
+            <span style="font-size: 0.72rem; color: var(--coffee-text-muted);">Try:</span>
+            <span class="quick-coupon-pill" onclick="quickApply('ANGKOR10')">ANGKOR10 (10% Off)</span>
+            <span class="quick-coupon-pill" onclick="quickApply('ROASTMASTER')">ROASTMASTER (15% Off)</span>
+          </div>
+          <div id="cartPageAppliedCoupon" class="applied-coupon-tag" style="margin-top: 0.75rem; display: none;"></div>
+        </div>
+
+        <div class="summary-line">
+          <span>Subtotal:</span>
+          <strong id="cartPageSubtotal">$0.00</strong>
+        </div>
+        <div class="summary-line" id="cartPageDiscountRow" style="display: none; color: #10b981;">
+          <span>Discount:</span>
+          <strong id="cartPageDiscount">-$0.00</strong>
+        </div>
+        <div class="summary-line">
+          <span>Shipping (Roasted Express):</span>
+          <strong id="cartPageShipping">$4.50</strong>
+        </div>
+        <div class="summary-line total">
+          <span>Estimated Total:</span>
+          <strong id="cartPageTotal">$0.00</strong>
+        </div>
+
+        <div style="margin-top: 2rem;">
+          <a href="checkout.html" class="btn btn-primary btn-large btn-block">
+            <i class="fa-solid fa-lock"></i> Proceed to Secure Checkout
+          </a>
+        </div>
+
+        <div style="margin-top: 1.5rem; text-align: center; font-size: 0.8rem; color: var(--coffee-text-muted);">
+          <i class="fa-solid fa-shield-halved text-gold"></i> 256-Bit SSL Encrypted Checkout<br>
+          Roasted fresh on demand with 100% Satisfaction Guarantee
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-bottom" style="border: none; padding: 0;">
+      <div>&copy; 2026 Angkor Coffee Roasters Co., Ltd.</div>
+      <div class="payment-badges">
+        <i class="fa-brands fa-cc-visa"></i>
+        <i class="fa-brands fa-cc-mastercard"></i>
+        <i class="fa-solid fa-qrcode"></i>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Slide-Out Shopping Cart Drawer -->
+  <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="drawer-header">
+      <h3><i class="fa-solid fa-bag-shopping text-gold"></i> Your Coffee Bag</h3>
+      <button class="drawer-close-btn" id="cartDrawerCloseBtn">&times;</button>
+    </div>
+    <div class="free-shipping-progress" id="freeShippingProgress"></div>
+    <div class="drawer-body" id="cartDrawerItems"></div>
+  </aside>
+
+  <div id="toastNotificationContainer" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    function renderFullCartPage() {
+      const container = document.getElementById('cartPageItemsContainer');
+      const progressContainer = document.getElementById('cartPageShippingProgress');
+      const subtotal = cartService.getSubtotal();
+      const discount = cartService.getDiscountAmount();
+      const shipping = cartService.getShippingFee();
+      const total = cartService.getFinalTotal();
+
+      // Free shipping progress bar
+      if (progressContainer) {
+        if (subtotal >= FREE_SHIPPING_THRESHOLD) {
+          progressContainer.innerHTML = `
+            <div class="shipping-unlocked"><i class="fa-solid fa-circle-check"></i> <strong>You've unlocked Free Express Shipping!</strong> (Orders $${FREE_SHIPPING_THRESHOLD}+)</div>
+            <div class="progress-bar-track"><div class="progress-bar-fill" style="width: 100%"></div></div>
+          `;
+        } else {
+          const remaining = (FREE_SHIPPING_THRESHOLD - subtotal).toFixed(2);
+          const percent = Math.min(100, Math.round((subtotal / FREE_SHIPPING_THRESHOLD) * 100));
+          progressContainer.innerHTML = `
+            <div class="shipping-needed"><i class="fa-solid fa-truck-fast"></i> Add <strong>${cartService.formatPrice(remaining)}</strong> more to get <strong>FREE SHIPPING</strong>!</div>
+            <div class="progress-bar-track"><div class="progress-bar-fill" style="width: ${percent}%"></div></div>
+          `;
+        }
+      }
+
+      if (cartService.cart.length === 0) {
+        container.innerHTML = `
+          <div class="empty-cart-state" style="background: #fff; border-radius: var(--radius-lg); border: 1px solid #ebe2d7; padding: 4rem 2rem;">
+            <div class="empty-cart-icon"><i class="fa-solid fa-mug-hot"></i></div>
+            <h2>Your Bag is Currently Empty</h2>
+            <p>You haven't selected any freshly roasted beans yet. Let's find your sacred roast!</p>
+            <a href="shop.html" class="btn btn-primary btn-large">
+              <i class="fa-solid fa-compass"></i> Explore All Fresh Roasts
+            </a>
+          </div>
+        `;
+        document.getElementById('cartPageSubtotal').textContent = cartService.formatPrice(0);
+        document.getElementById('cartPageShipping').textContent = cartService.formatPrice(0);
+        document.getElementById('cartPageTotal').textContent = cartService.formatPrice(0);
+        return;
+      }
+
+      let html = `
+        <table class="cart-items-table">
+          <thead>
+            <tr>
+              <th>Roast</th>
+              <th>Unit Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      cartService.cart.forEach(item => {
+        html += `
+          <tr>
+            <td>
+              <div class="cart-row-product">
+                <img src="${item.image}" alt="${item.name}" class="cart-row-img">
+                <div>
+                  <h4 style="font-size: 1.05rem; margin-bottom: 2px;">${item.name}</h4>
+                  <div style="font-size: 0.78rem; color: var(--coffee-text-muted);">
+                    <span class="spec-pill">${item.weight}</span> • <span class="spec-pill">${item.grind}</span>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td><strong>${cartService.formatPrice(item.unitPrice)}</strong></td>
+            <td>
+              <div class="qty-stepper">
+                <button type="button" onclick="cartService.updateQuantity('${item.cartItemId}', ${item.quantity - 1}); renderFullCartPage();">-</button>
+                <input type="number" value="${item.quantity}" readonly>
+                <button type="button" onclick="cartService.updateQuantity('${item.cartItemId}', ${item.quantity + 1}); renderFullCartPage();">+</button>
+              </div>
+            </td>
+            <td><strong style="font-size: 1.1rem; color: var(--coffee-900);">${cartService.formatPrice(item.unitPrice * item.quantity)}</strong></td>
+            <td>
+              <button class="cart-item-remove" onclick="cartService.removeItem('${item.cartItemId}'); renderFullCartPage();" title="Remove roast">
+                <i class="fa-solid fa-trash-can" style="font-size: 1.1rem;"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+      });
+
+      html += `</tbody></table>`;
+      container.innerHTML = html;
+
+      // Summary lines
+      document.getElementById('cartPageSubtotal').textContent = cartService.formatPrice(subtotal);
+
+      const discountRow = document.getElementById('cartPageDiscountRow');
+      const discountEl = document.getElementById('cartPageDiscount');
+      if (discount > 0) {
+        discountRow.style.display = 'flex';
+        discountEl.textContent = `-${cartService.formatPrice(discount)}`;
+      } else {
+        discountRow.style.display = 'none';
+      }
+
+      document.getElementById('cartPageShipping').textContent = shipping === 0 ? 'FREE' : cartService.formatPrice(shipping);
+      document.getElementById('cartPageTotal').textContent = cartService.formatPrice(total);
+
+      // Coupon pill tag
+      const couponTag = document.getElementById('cartPageAppliedCoupon');
+      if (cartService.appliedCoupon) {
+        couponTag.style.display = 'inline-flex';
+        couponTag.innerHTML = `
+          <span><i class="fa-solid fa-tag"></i> ${cartService.appliedCoupon.code} (${cartService.appliedCoupon.name})</span>
+          <button type="button" onclick="cartService.removeCoupon(); renderFullCartPage();"><i class="fa-solid fa-xmark"></i></button>
+        `;
+      } else {
+        couponTag.style.display = 'none';
+      }
+    }
+
+    function applyCartPageCoupon() {
+      const input = document.getElementById('cartPageCouponInput');
+      if (input && input.value) {
+        const res = cartService.applyCouponCode(input.value);
+        if (!res.success) {
+          alert(res.message);
+        } else {
+          input.value = '';
+          renderFullCartPage();
+        }
+      }
+    }
+
+    function quickApply(code) {
+      document.getElementById('cartPageCouponInput').value = code;
+      applyCartPageCoupon();
+    }
+
+    function handleClearCartPrompt() {
+      if (confirm('Are you sure you want to empty your entire bag?')) {
+        cartService.clearCart();
+        renderFullCartPage();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderFullCartPage();
+      window.addEventListener('angkor_cart_updated', renderFullCartPage);
+      window.addEventListener('angkor_currency_changed', renderFullCartPage);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Angkor Coffee Roasters | Sacred Cambodian Highland Specialty Coffee</title>
+  <meta name="description" content="Artisan small-batch coffee roaster in Siem Reap & Phnom Penh. Single-origin Mondulkiri Peaberry, Ratanakiri Micro-Lots, and Sacred Temple roasts delivered fresh within 48h.">
+  
+  <!-- Favicon / Brand Icon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
+
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar">
+    <div class="container announcement-inner">
+      <div class="announcement-msg">
+        <i class="fa-solid fa-fire-flame-curved text-gold"></i>
+        <span><strong>Fresh Roast Guarantee:</strong> Roasted within 48 hours of dispatch | Free express shipping on orders over $35</span>
+      </div>
+      <div class="announcement-actions">
+        <div class="currency-switcher" title="Toggle Currency">
+          <span style="font-size: 0.75rem; margin-right: 2px;">Currency:</span>
+          <button class="currency-toggle-btn active" data-currency="USD">USD ($)</button>
+          <button class="currency-toggle-btn" data-currency="KHR">KHR (៛)</button>
+        </div>
+        <a href="#clubSection" class="announcement-link">
+          <i class="fa-solid fa-gift"></i> Angkor Club: Save 15%
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <!-- Brand Logo -->
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon-wrap">
+          <i class="fa-solid fa-mug-hot"></i>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">ANGKOR <span>COFFEE</span></span>
+          <span class="brand-tagline">Artisan Roastery • Cambodia</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="shop.html" class="nav-link">Shop Roasts</a>
+        <a href="#roastingRitual" class="nav-link">Our Roast Ritual</a>
+        <a href="#quizSection" class="nav-link">Flavor Quiz <span class="nav-badge-pill">Find Match</span></a>
+        <a href="#clubSection" class="nav-link">Subscription</a>
+        <a href="#brewGuides" class="nav-link">Brew Guides</a>
+        <a href="story.html" class="nav-link">Our Story</a>
+        <a href="contact.html" class="nav-link">Tasting Room</a>
+      </nav>
+
+      <!-- Utilities -->
+      <div class="header-utilities">
+        <a href="shop.html" class="header-icon-btn" title="Search Roasts">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </a>
+        <div class="cart-btn-wrap">
+          <button class="header-icon-btn open-cart-btn" title="View Coffee Bag">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span class="cart-badge">0</span>
+          </button>
+        </div>
+        <button class="mobile-toggle-btn" id="mobileNavToggle" aria-label="Toggle navigation menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-live-badge">
+          <span class="live-pulse-dot"></span>
+          <span>Siem Reap Roastery: Roasting Batch #AK-892 Today</span>
+        </div>
+        <h1 class="hero-title">
+          Sacred Roasts.<br><em>Ancient Heritage.</em>
+        </h1>
+        <p class="hero-description">
+          Handcrafted small-batch artisan coffee, roasted in the shadow of Angkor. Sourced directly from Cambodia's highland volcanic micro-farms in Mondulkiri & Ratanakiri, delivered fresh to your door.
+        </p>
+        <div class="hero-actions">
+          <a href="shop.html" class="btn btn-primary btn-large">
+            <i class="fa-solid fa-bag-shopping"></i> Shop Fresh Roasts
+          </a>
+          <a href="#quizSection" class="btn btn-outline-white btn-large">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Take Flavor Quiz
+          </a>
+        </div>
+        <div class="hero-stats-strip">
+          <div class="stat-item">
+            <h4>1,100m+</h4>
+            <p>Highland Volcanic Elevation</p>
+          </div>
+          <div class="stat-item">
+            <h4>48 Hours</h4>
+            <p>From Drum To Dispatch</p>
+          </div>
+          <div class="stat-item">
+            <h4>100% Direct</h4>
+            <p>Fair Trade With Indigenous Farmers</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Visual Showcase -->
+      <div class="hero-visual">
+        <div class="hero-card-featured">
+          <span class="hero-badge-tag">Master Roaster's Pick</span>
+          <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=700&q=80" alt="Mondulkiri Peaberry Reserve Coffee" class="hero-visual-img">
+          <div class="hero-card-info">
+            <div>
+              <h3>Mondulkiri Peaberry</h3>
+              <p>Wild Honey, Dark Cacao & Stone Fruit</p>
+            </div>
+            <div class="hero-card-price">
+              <span class="price">$16.50</span>
+              <button class="btn btn-primary btn-add-cart" onclick="cartService.addItem(getProductById('mondulkiri-peaberry'), '250g', 'Whole Bean', 1, true)">
+                <i class="fa-solid fa-plus"></i> Quick Bag
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Roasting Ticker Strip -->
+  <div class="roast-ticker-strip">
+    <div class="container">
+      <div class="ticker-track">
+        <div class="ticker-item">
+          <i class="fa-solid fa-fire"></i>
+          <span>Roasting Status: <strong>Cast Iron Drum Batch #AK-892 in Progress</strong></span>
+        </div>
+        <div class="ticker-item">
+          <i class="fa-solid fa-mountain"></i>
+          <span>Origin Sourcing: <strong>Mondulkiri Bunong Harvest (Altitude 1,050m)</strong></span>
+        </div>
+        <div class="ticker-item">
+          <i class="fa-solid fa-award"></i>
+          <span>Specialty Cupping Score: <strong>87.5+ Points Specialty Grade</strong></span>
+        </div>
+        <div class="ticker-item">
+          <i class="fa-solid fa-truck-fast"></i>
+          <span>Shipping: <strong>Carbon-Neutral Worldwide & Free Phnom Penh/Siem Reap Delivery</strong></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Featured Roasts Catalog Section -->
+  <section class="section-padding" id="shopCatalog">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Freshly Roasted Weekly</span>
+        <h2 class="section-title">Our Master Roast Collection</h2>
+        <p class="section-subtitle">Every single bag is stamped with its precise roast date, artisan drum batch number, and farm elevation coordinates.</p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="roast-filters-nav">
+        <button class="roast-filter-tab active" data-filter="all" onclick="filterHomepageRoasts('all')">
+          <i class="fa-solid fa-border-all"></i> All Specialty Roasts
+        </button>
+        <button class="roast-filter-tab" data-filter="single-origin" onclick="filterHomepageRoasts('single-origin')">
+          <i class="fa-solid fa-mountain-sun"></i> Single Origin & Micro-Lots
+        </button>
+        <button class="roast-filter-tab" data-filter="signature" onclick="filterHomepageRoasts('signature')">
+          <i class="fa-solid fa-award"></i> Signature Blends
+        </button>
+        <button class="roast-filter-tab" data-filter="espresso" onclick="filterHomepageRoasts('espresso')">
+          <i class="fa-solid fa-mug-saucer"></i> Espresso Roast
+        </button>
+        <button class="roast-filter-tab" data-filter="dark" onclick="filterHomepageRoasts('dark')">
+          <i class="fa-solid fa-fire"></i> Dark French & Temple
+        </button>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="roasts-grid" id="featuredRoastsGrid">
+        <!-- Rendered dynamically by main.js -->
+      </div>
+
+      <div style="text-align: center; margin-top: 3.5rem;">
+        <a href="shop.html" class="btn btn-secondary btn-large">
+          <i class="fa-solid fa-compass"></i> View All 8 Roastery Micro-Lots & Brewing Accessories
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roasting Ritual & Craftsmanship Section -->
+  <section class="section-padding roasting-process-section" id="roastingRitual">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">From Volcanic Earth to Sacred Cup</span>
+        <h2 class="section-title">The Angkor Roasting Ritual</h2>
+        <p class="section-subtitle" style="color: var(--coffee-crema);">We respect the sacred integrity of every bean through precision time-temperature profiling on our vintage cast iron drums.</p>
+      </div>
+
+      <div class="process-steps-grid">
+        <!-- Step 1 -->
+        <div class="process-card">
+          <div class="process-step-num">01</div>
+          <div class="process-card-icon"><i class="fa-solid fa-mountain"></i></div>
+          <h3>Highland Terroir</h3>
+          <p>Hand-cultivated in the mineral-dense basalt volcanic soils of Mondulkiri and Ratanakiri at elevations up to 1,200 meters above sea level.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="process-card">
+          <div class="process-step-num">02</div>
+          <div class="process-card-icon"><i class="fa-solid fa-hand-sparkles"></i></div>
+          <h3>Manual Micro-Sorting</h3>
+          <p>Only ripe, hand-picked cherries are selected. Before roasting, our artisans meticulously hand-inspect each batch, rejecting any defective bean.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="process-card">
+          <div class="process-step-num">03</div>
+          <div class="process-card-icon"><i class="fa-solid fa-fire-burner"></i></div>
+          <h3>Cast-Iron Drum Roasting</h3>
+          <p>Roasted in intimate 12kg small batches on customized cast-iron drums to develop delicate sweetness and complex sugars without scorching.</p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="process-card">
+          <div class="process-step-num">04</div>
+          <div class="process-card-icon"><i class="fa-solid fa-shield-heart"></i></div>
+          <h3>Sensory Cupping & Packing</h3>
+          <p>Every single roast batch is cupped for balance, aroma, and clarity, then sealed immediately in foil bags with one-way degassing freshness valves.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Coffee Flavor Finder Quiz -->
+  <section class="section-padding quiz-section" id="quizSection">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Personalized Roaster Match</span>
+        <h2 class="section-title">Find Your Sacred Roast</h2>
+        <p class="section-subtitle">Answer 3 simple questions and our Master Roasters will recommend your ideal bean profile.</p>
+      </div>
+
+      <div class="quiz-wrapper">
+        <div class="quiz-steps-tracker">
+          <div class="quiz-step-dot active" id="quizStepDot1">
+            <span class="dot-circle">1</span>
+            <span>Brew Method</span>
+          </div>
+          <div class="quiz-step-dot" id="quizStepDot2">
+            <span class="dot-circle">2</span>
+            <span>Flavor Notes</span>
+          </div>
+          <div class="quiz-step-dot" id="quizStepDot3">
+            <span class="dot-circle">3</span>
+            <span>Roast Intensity</span>
+          </div>
+        </div>
+
+        <!-- Dynamic Quiz Container -->
+        <div id="quizStepContainer">
+          <!-- Rendered dynamically by main.js -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Angkor Coffee Club Subscription Section -->
+  <section class="section-padding club-section" id="clubSection">
+    <div class="container club-grid">
+      <div class="club-info">
+        <span class="section-eyebrow">Never Run Out of Sacred Coffee</span>
+        <h2 class="section-title" style="color: #fff;">Join the Angkor Coffee Club</h2>
+        <p style="color: var(--coffee-crema); font-size: 1.05rem; line-height: 1.65;">
+          Freshly roasted beans delivered right to your doorstep according to your schedule. Curated seasonal micro-lots, exclusive harvest Peaberries, and master roaster tasting notes.
+        </p>
+
+        <div class="club-perks-list">
+          <div class="club-perk-item">
+            <div class="club-perk-icon"><i class="fa-solid fa-percent"></i></div>
+            <div class="club-perk-text">
+              <strong>Save 15% On Every Single Delivery</strong>
+              <p>Lock in VIP member pricing for as long as your membership is active.</p>
+            </div>
+          </div>
+          <div class="club-perk-item">
+            <div class="club-perk-icon"><i class="fa-solid fa-mug-saucer"></i></div>
+            <div class="club-perk-text">
+              <strong>Complimentary Handcrafted Ceramic Angkor Mug</strong>
+              <p>Handmade by local Siem Reap artisans, shipped free with your 2nd delivery.</p>
+            </div>
+          </div>
+          <div class="club-perk-item">
+            <div class="club-perk-icon"><i class="fa-solid fa-calendar-check"></i></div>
+            <div class="club-perk-text">
+              <strong>Complete Flexibility: Pause, Swap, or Cancel Anytime</strong>
+              <p>Skip weeks when traveling or change your grind and roast preferences in 1 click.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subscription Card Builder -->
+      <div class="club-card-builder">
+        <h3>Customize Your Roast Club</h3>
+        <p class="builder-subtext">Select your preference below to subscribe and save 15%:</p>
+
+        <div class="builder-field">
+          <label>Delivery Frequency:</label>
+          <div class="builder-pills-row">
+            <div class="builder-pill active" onclick="setSubFrequency(this, 'Weekly')">
+              <strong>Every Week</strong>
+              <em>Freshness Purist</em>
+            </div>
+            <div class="builder-pill" onclick="setSubFrequency(this, 'Bi-Weekly')">
+              <strong>Every 2 Weeks</strong>
+              <em>Most Popular</em>
+            </div>
+            <div class="builder-pill" onclick="setSubFrequency(this, 'Monthly')">
+              <strong>Every Month</strong>
+              <em>Casual Sipper</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="builder-field">
+          <label>Coffee Quantity:</label>
+          <div class="builder-pills-row">
+            <div class="builder-pill active" onclick="setSubBags(this, '1 Bag (250g)')">
+              <strong>1 Bag</strong>
+              <em>1-2 cups/day</em>
+            </div>
+            <div class="builder-pill" onclick="setSubBags(this, '2 Bags (500g)')">
+              <strong>2 Bags</strong>
+              <em>2-4 cups/day</em>
+            </div>
+            <div class="builder-pill" onclick="setSubBags(this, '4 Bags (1kg)')">
+              <strong>4 Bags</strong>
+              <em>Office / Family</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="builder-field">
+          <label>Preferred Roast Style:</label>
+          <select id="subRoastStyle" class="styled-select" style="background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(200,138,75,0.4);">
+            <option value="Roaster Curated Surprise" selected>Master Roaster's Rotating Micro-Lot Choice</option>
+            <option value="Mondulkiri Peaberry (Medium)">Mondulkiri Peaberry Reserve (Medium)</option>
+            <option value="Angkor Sacred Temple (Dark)">Angkor Sacred Temple French Dark Roast</option>
+            <option value="Bayon Crema (Espresso)">Bayon Espresso Crema Special</option>
+            <option value="Mondulkiri Decaf">Mondulkiri Swiss Water Decaf</option>
+          </select>
+        </div>
+
+        <div class="club-savings-banner">
+          <div><i class="fa-solid fa-sparkles"></i> Regular: <span style="text-decoration: line-through;">$16.50</span></div>
+          <div>Your Club Price: <strong>$14.00 / bag (15% OFF)</strong></div>
+        </div>
+
+        <button class="btn btn-primary btn-block btn-large" onclick="handleSubscribeClub()">
+          <i class="fa-solid fa-repeat"></i> Start Sacred Subscription • Free Shipping
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Artisan Brew Guides Section -->
+  <section class="section-padding" id="brewGuides">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Unlock Maximum Terroir</span>
+        <h2 class="section-title">Artisan Brew Guides</h2>
+        <p class="section-subtitle">Fine-tuned extraction recipes designed by our lead baristas to highlight origin nuances.</p>
+      </div>
+
+      <div class="brew-guides-grid">
+        <!-- V60 Pour Over -->
+        <div class="brew-guide-card">
+          <div class="brew-icon"><i class="fa-solid fa-filter"></i></div>
+          <h3>V60 Pour Over</h3>
+          <p>Ideal for highlighting the delicate honey and floral notes of Mondulkiri highland peaberries.</p>
+          <table class="brew-specs-table">
+            <tr><td>Coffee / Water</td><td>18g / 300g (1:16.6)</td></tr>
+            <tr><td>Grind Size</td><td>Medium-Fine (Sea Salt)</td></tr>
+            <tr><td>Water Temp</td><td>92°C - 94°C</td></tr>
+            <tr><td>Total Brew Time</td><td>2:45 - 3:00 min</td></tr>
+          </table>
+          <div class="brew-tip">
+            <strong>Roaster Tip:</strong> Bloom with 50g of water for 45s to let carbon dioxide escape freely.
+          </div>
+        </div>
+
+        <!-- Traditional Phin Filter -->
+        <div class="brew-guide-card">
+          <div class="brew-icon"><i class="fa-solid fa-fire-burner"></i></div>
+          <h3>Traditional Phin Filter</h3>
+          <p>The iconic Southeast Asian slow-drip method. Delivers dense, velvety chocolate body with condensed milk.</p>
+          <table class="brew-specs-table">
+            <tr><td>Coffee / Water</td><td>22g / 120g (1:5.5)</td></tr>
+            <tr><td>Grind Size</td><td>Medium-Coarse</td></tr>
+            <tr><td>Water Temp</td><td>95°C</td></tr>
+            <tr><td>Drip Rate</td><td>40-50 drops per min</td></tr>
+          </table>
+          <div class="brew-tip">
+            <strong>Roaster Tip:</strong> Pour over 1.5 tablespoons of sweet condensed milk and stir over ice.
+          </div>
+        </div>
+
+        <!-- Espresso -->
+        <div class="brew-guide-card">
+          <div class="brew-icon"><i class="fa-solid fa-mug-hot"></i></div>
+          <h3>Espresso Machine</h3>
+          <p>Extracting the thick golden crema and dense hazelnut body of our Bayon Crema roast.</p>
+          <table class="brew-specs-table">
+            <tr><td>Dose / Yield</td><td>19g In / 40g Out (1:2.1)</td></tr>
+            <tr><td>Grind Size</td><td>Extra Fine (Powder)</td></tr>
+            <tr><td>Pressure</td><td>9 Bar Pressure</td></tr>
+            <tr><td>Extraction Time</td><td>27 - 30 seconds</td></tr>
+          </table>
+          <div class="brew-tip">
+            <strong>Roaster Tip:</strong> Ensure a flat, even tamp to prevent channeling and bitter over-extraction.
+          </div>
+        </div>
+
+        <!-- Cold Brew -->
+        <div class="brew-guide-card">
+          <div class="brew-icon"><i class="fa-solid fa-snowflake"></i></div>
+          <h3>18h Nitro Cold Brew</h3>
+          <p>Smooth, completely devoid of bitterness, highlighting chocolate fudge and vanilla sweetness.</p>
+          <table class="brew-specs-table">
+            <tr><td>Coffee / Water</td><td>100g / 800g (1:8)</td></tr>
+            <tr><td>Grind Size</td><td>Coarse (Kosher Salt)</td></tr>
+            <tr><td>Steeping Temp</td><td>Cold Filtered Water</td></tr>
+            <tr><td>Steep Duration</td><td>18 - 20 Hours</td></tr>
+          </table>
+          <div class="brew-tip">
+            <strong>Roaster Tip:</strong> Strain twice through unbleached paper filters for crystal clarity.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Heritage & Roastery Story -->
+  <section class="section-padding bg-dark" id="story">
+    <div class="container heritage-grid">
+      <div class="heritage-images-composite">
+        <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80" alt="Angkor Coffee Roastery Lab" class="heritage-main-img">
+        <div class="heritage-floating-card">
+          <div class="floating-icon"><i class="fa-solid fa-seedling"></i></div>
+          <h4>Indigenous Bunong Farms</h4>
+          <p>Supporting over 65 indigenous farming families in Mondulkiri with 100% fair prices.</p>
+        </div>
+      </div>
+
+      <div class="heritage-content">
+        <span class="section-eyebrow">Born Under Ancient Skies</span>
+        <h2 class="section-title" style="color: #fff;">Honoring Sacred Soil & Highlands</h2>
+        <p>
+          Cambodia's coffee history is one of the world's most captivating, best-kept secrets. In the remote eastern highlands of Mondulkiri, mineral-rich red volcanic basalt soil and misty mountain micro-climates create conditions comparable to the finest coffee regions of East Africa and Central America.
+        </p>
+        <p>
+          Founded in Siem Reap, <strong>Angkor Coffee Roasters</strong> was established with a singular mission: to resurrect and champion Cambodian highland specialty coffee on the world stage. We collaborate directly with indigenous Bunong tribal families, providing organic farming support, harvesting training, and paying 45% above commodity market prices.
+        </p>
+        <div style="margin-top: 2rem;">
+          <a href="story.html" class="btn btn-outline-white">
+            <i class="fa-solid fa-book-open"></i> Read Our Full Origin Story
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Customer Reviews & Testimonials -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Roast Enthusiasts Speak</span>
+        <h2 class="section-title">Loved by Coffee Lovers Worldwide</h2>
+        <p class="section-subtitle">Real experiences from our community of over 14,000 coffee lovers and specialty cafe partners.</p>
+      </div>
+
+      <div class="reviews-grid">
+        <!-- Review 1 -->
+        <div class="review-card">
+          <div>
+            <div class="review-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="review-quote">
+              "The Mondulkiri Peaberry is an absolute revelation. I've tasted specialty coffees across Ethiopia and Colombia, but the natural wild honey sweetness in this Cambodian bean is totally unique. Fast delivery to Singapore too!"
+            </p>
+          </div>
+          <div class="review-author">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Sarah Chen" class="author-avatar">
+            <div class="author-info">
+              <strong>Sarah Chen</strong>
+              <span><i class="fa-solid fa-circle-check"></i> Verified Buyer • Singapore</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="review-card">
+          <div>
+            <div class="review-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="review-quote">
+              "Sacred Temple Dark Roast is the only coffee we brew in our cafe for iced lattes. It cuts through milk with this divine dark cacao and spice note. The degassing valve and roast date on the bag shows true craft."
+            </p>
+          </div>
+          <div class="review-author">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Marcus Vance" class="author-avatar">
+            <div class="author-info">
+              <strong>Marcus Vance</strong>
+              <span><i class="fa-solid fa-circle-check"></i> Head Barista • Melbourne</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="review-card">
+          <div>
+            <div class="review-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="review-quote">
+              "Subscribing to the Angkor Coffee Club was the best decision. Every two weeks a fresh bag arrives smelling like toasted hazelnuts and caramel. You can literally smell how freshly roasted it is!"
+            </p>
+          </div>
+          <div class="review-author">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80" alt="Channary Meas" class="author-avatar">
+            <div class="author-info">
+              <strong>Channary Meas</strong>
+              <span><i class="fa-solid fa-circle-check"></i> Club Member • Phnom Penh</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Signup Section -->
+  <section class="newsletter-section">
+    <div class="container newsletter-box">
+      <span class="section-eyebrow" style="color: var(--coffee-gold-light);">Join The Inner Circle</span>
+      <h2>Receive 10% Off Your First Fresh Roast</h2>
+      <p>Subscribe to receive secret micro-lot drop notifications, master cupping notes, and exclusive brewing tips.</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Enter your email address..." required>
+        <button type="submit" class="btn btn-primary">
+          <i class="fa-solid fa-envelope"></i> Claim 10% Off
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Master Footer -->
+  <footer class="site-footer">
+    <div class="container footer-top-grid">
+      <!-- Col 1: Brand Info -->
+      <div class="footer-brand">
+        <div class="brand-logo" style="margin-bottom: 1rem;">
+          <div class="brand-icon-wrap"><i class="fa-solid fa-mug-hot"></i></div>
+          <div class="brand-text">
+            <span class="brand-title">ANGKOR <span>COFFEE</span></span>
+            <span class="brand-tagline">Artisan Roastery • Cambodia</span>
+          </div>
+        </div>
+        <p>
+          Rooted in ancient heritage and Cambodian highland soils. We roast in micro-batches with passion and precision to deliver sacred coffee experiences worldwide.
+        </p>
+        <div class="footer-socials">
+          <a href="#" class="social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-link" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-link" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+          <a href="#" class="social-link" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <!-- Col 2: Specialty Shop -->
+      <div class="footer-col">
+        <h4>Specialty Roasts</h4>
+        <div class="footer-links">
+          <a href="shop.html?cat=single-origin">Single Origin Micro-Lots</a>
+          <a href="shop.html?cat=signature">Signature Temple Blends</a>
+          <a href="shop.html?cat=espresso">Bayon Espresso Roasts</a>
+          <a href="shop.html?roast=dark">Dark French Roasts</a>
+          <a href="shop.html?cat=decaf">Swiss Water Decaf</a>
+          <a href="#clubSection">Angkor Coffee Club</a>
+        </div>
+      </div>
+
+      <!-- Col 3: Learn & Discover -->
+      <div class="footer-col">
+        <h4>Heritage & Guides</h4>
+        <div class="footer-links">
+          <a href="story.html">Our Origin Story</a>
+          <a href="#roastingRitual">The Roasting Ritual</a>
+          <a href="#brewGuides">Brew Guides & Ratios</a>
+          <a href="#quizSection">Flavor Finder Quiz</a>
+          <a href="contact.html">Wholesale Beans & Cafes</a>
+          <a href="contact.html">Visit Roastery Lab</a>
+        </div>
+      </div>
+
+      <!-- Col 4: Roastery Labs -->
+      <div class="footer-col">
+        <h4>Roastery Labs</h4>
+        <div class="footer-contact-info">
+          <div class="contact-row">
+            <i class="fa-solid fa-location-dot"></i>
+            <span><strong>Siem Reap Flagship:</strong> Wat Bo Village, Siem Reap, Cambodia</span>
+          </div>
+          <div class="contact-row">
+            <i class="fa-solid fa-location-dot"></i>
+            <span><strong>Phnom Penh Lab:</strong> Street 302, BKK1, Phnom Penh</span>
+          </div>
+          <div class="contact-row">
+            <i class="fa-solid fa-phone"></i>
+            <span>+855 (0) 23 998 844</span>
+          </div>
+          <div class="contact-row">
+            <i class="fa-solid fa-envelope"></i>
+            <span>roaster@angkorcoffee.com</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div>
+        &copy; 2026 Angkor Coffee Roasters Co., Ltd. All Rights Reserved. Crafted with reverence for Cambodian terroir.
+      </div>
+      <div class="payment-badges">
+        <span>Accepted:</span>
+        <i class="fa-brands fa-cc-visa" title="Visa"></i>
+        <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
+        <i class="fa-brands fa-cc-apple-pay" title="Apple Pay"></i>
+        <i class="fa-solid fa-qrcode" title="ABA PAY KHQR"></i>
+        <i class="fa-solid fa-money-bill-wave" title="Cash On Delivery"></i>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Slide-Out Shopping Cart Drawer -->
+  <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="drawer-header">
+      <h3><i class="fa-solid fa-bag-shopping text-gold"></i> Your Coffee Bag</h3>
+      <button class="drawer-close-btn" id="cartDrawerCloseBtn" aria-label="Close Bag">&times;</button>
+    </div>
+
+    <!-- Free Shipping Progress -->
+    <div class="free-shipping-progress" id="freeShippingProgress">
+      <!-- Injected by cart.js -->
+    </div>
+
+    <!-- Items List Container -->
+    <div class="drawer-body" id="cartDrawerItems">
+      <!-- Injected by cart.js -->
+    </div>
+
+    <!-- Drawer Footer / Summary -->
+    <div class="drawer-footer" id="cartDrawerFooter">
+      <form class="drawer-coupon-form" id="drawerCouponForm">
+        <input type="text" placeholder="Promo code (e.g. ANGKOR10)" id="drawerCouponInput">
+        <button type="submit" class="btn btn-secondary" style="padding: 0.5rem 0.9rem; font-size: 0.8rem;">Apply</button>
+      </form>
+      <div id="drawerAppliedCoupon" class="applied-coupon-tag" style="display: none;"></div>
+
+      <div class="drawer-summary-rows">
+        <div class="summary-row">
+          <span>Subtotal:</span>
+          <span id="drawerSubtotal">$0.00</span>
+        </div>
+        <div class="summary-row" id="drawerDiscountRow" style="display: none; color: #10b981;">
+          <span>Discount:</span>
+          <span id="drawerDiscount">-$0.00</span>
+        </div>
+        <div class="summary-row">
+          <span>Fresh Delivery:</span>
+          <span id="drawerShipping">$4.50</span>
+        </div>
+        <div class="summary-row total-row">
+          <span>Total:</span>
+          <span id="drawerTotal">$0.00</span>
+        </div>
+      </div>
+
+      <div class="drawer-actions">
+        <a href="checkout.html" class="btn btn-primary btn-block btn-large">
+          <i class="fa-solid fa-lock"></i> Secure Checkout
+        </a>
+        <a href="cart.html" class="btn btn-outline btn-block" style="font-size: 0.85rem; padding: 0.6rem;">
+          View Full Cart & Shipping Calculator
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Quick View Modal Container (Populated dynamically) -->
+  <div id="quickViewModal" class="angkor-modal-overlay"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastNotificationContainer" class="toast-container"></div>
+
+  <!-- Subscription Builder Helpers Script -->
+  <script>
+    let subFrequency = 'Weekly';
+    let subBags = '1 Bag (250g)';
+
+    function setSubFrequency(btn, freq) {
+      document.querySelectorAll('.builder-field:nth-child(1) .builder-pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      subFrequency = freq;
+    }
+
+    function setSubBags(btn, bags) {
+      document.querySelectorAll('.builder-field:nth-child(2) .builder-pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      subBags = bags;
+    }
+
+    function handleSubscribeClub() {
+      const roastStyle = document.getElementById('subRoastStyle').value;
+      const subProduct = {
+        id: 'angkor-club-sub',
+        name: `Angkor Club: ${roastStyle}`,
+        tagline: `${subFrequency} subscription • ${subBags}`,
+        basePrice: 14.00,
+        image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=700&q=80',
+        roastLevel: 'Curated',
+        origin: 'Cambodian Highlands'
+      };
+      cartService.addItem(subProduct, '250g', 'Whole Bean', 1, true);
+      cartService.showToast('Subscription Configured!', `Added ${subFrequency} delivery of ${roastStyle} with 15% discount!`, 'fa-solid fa-repeat');
+    }
+  </script>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

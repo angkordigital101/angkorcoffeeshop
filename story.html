@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Story & Heritage | Angkor Coffee Roasters</title>
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .story-hero {
+      background: linear-gradient(180deg, rgba(13,7,4,0.92) 0%, rgba(26,14,8,0.85) 100%),
+                  url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1920&q=80') center/cover;
+      color: #fff;
+      padding: 6rem 0 5rem;
+      text-align: center;
+      border-bottom: 2px solid var(--coffee-border);
+    }
+    .story-section {
+      padding: 4.5rem 0;
+    }
+    .story-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      align-items: center;
+      margin-bottom: 4.5rem;
+    }
+    .story-grid-2.reverse {
+      direction: rtl;
+    }
+    .story-grid-2.reverse > * {
+      direction: ltr;
+    }
+    .story-img-box {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 2px solid #eae2d7;
+      height: 380px;
+    }
+    .story-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    @media (max-width: 900px) {
+      .story-grid-2, .story-grid-2.reverse {
+        grid-template-columns: 1fr;
+        direction: ltr;
+        gap: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar">
+    <div class="container announcement-inner">
+      <div class="announcement-msg">
+        <i class="fa-solid fa-fire text-gold"></i>
+        <span><strong>Fresh Roast Guarantee:</strong> Small-batch roasted within 48h of dispatch</span>
+      </div>
+      <div class="announcement-actions">
+        <div class="currency-switcher">
+          <button class="currency-toggle-btn active" data-currency="USD">USD ($)</button>
+          <button class="currency-toggle-btn" data-currency="KHR">KHR (៛)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon-wrap"><i class="fa-solid fa-mug-hot"></i></div>
+        <div class="brand-text">
+          <span class="brand-title">ANGKOR <span>COFFEE</span></span>
+          <span class="brand-tagline">Artisan Roastery • Cambodia</span>
+        </div>
+      </a>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="shop.html" class="nav-link">Shop Roasts</a>
+        <a href="index.html#roastingRitual" class="nav-link">Our Roast Ritual</a>
+        <a href="index.html#quizSection" class="nav-link">Flavor Quiz</a>
+        <a href="index.html#clubSection" class="nav-link">Subscription</a>
+        <a href="story.html" class="nav-link active">Our Story</a>
+        <a href="contact.html" class="nav-link">Tasting Room</a>
+      </nav>
+
+      <div class="header-utilities">
+        <div class="cart-btn-wrap">
+          <button class="header-icon-btn open-cart-btn" title="View Bag">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span class="cart-badge">0</span>
+          </button>
+        </div>
+        <button class="mobile-toggle-btn" id="mobileNavToggle"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Story Hero -->
+  <div class="story-hero">
+    <div class="container">
+      <span class="section-eyebrow" style="color: var(--coffee-gold-light);">Our Heritage & Philosophy</span>
+      <h1 style="font-size: 3rem; color: #fff; margin: 0.5rem 0 1rem;">Sacred Soil, Highland Spirit</h1>
+      <p style="color: var(--coffee-crema); max-width: 650px; margin: 0 auto; font-size: 1.1rem;">
+        How a passion for Cambodia's ancient terroir ignited a specialty coffee renaissance in Siem Reap and the Mondulkiri highlands.
+      </p>
+    </div>
+  </div>
+
+  <!-- Story Sections -->
+  <main class="container story-section">
+    <!-- Chapter 1 -->
+    <div class="story-grid-2">
+      <div>
+        <span class="section-eyebrow">Chapter 01</span>
+        <h2 class="section-title">The Forgotten Volcanic Highlands</h2>
+        <p style="color: var(--coffee-text-muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+          Tucked away in the remote northeastern corner of Cambodia lies the Mondulkiri and Ratanakiri plateau. Blessed with deep crimson basalt volcanic soil, perpetual mountain mists, and elevations exceeding 1,100 meters, this land holds a natural affinity for cultivating world-class Arabica and unique micro-lot Peaberries.
+        </p>
+        <p style="color: var(--coffee-text-muted); font-size: 1.05rem; line-height: 1.7;">
+          For decades, these rare harvests remained hidden from global specialty coffee lovers. In 2021, Angkor Coffee Roasters embarked on a quest to revive and celebrate this extraordinary terroir.
+        </p>
+      </div>
+      <div class="story-img-box">
+        <img src="https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=800&q=80" alt="Highland Coffee Harvest">
+      </div>
+    </div>
+
+    <!-- Chapter 2 -->
+    <div class="story-grid-2 reverse">
+      <div>
+        <span class="section-eyebrow">Chapter 02</span>
+        <h2 class="section-title">In Partnership With The Bunong</h2>
+        <p style="color: var(--coffee-text-muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+          True specialty coffee begins with human dignity. We work in direct partnership with indigenous Bunong farming families who have stewarded Mondulkiri's sacred forest canopies for centuries.
+        </p>
+        <p style="color: var(--coffee-text-muted); font-size: 1.05rem; line-height: 1.7;">
+          We reject the destructive volatility of commodity brokers. Angkor Coffee pays our farming partners an average of 45% above Fair Trade minimums, while financing organic compost initiatives and clean water wells in farm villages.
+        </p>
+      </div>
+      <div class="story-img-box">
+        <img src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?auto=format&fit=crop&w=800&q=80" alt="Coffee drying on raised beds">
+      </div>
+    </div>
+
+    <!-- Chapter 3 -->
+    <div class="story-grid-2">
+      <div>
+        <span class="section-eyebrow">Chapter 03</span>
+        <h2 class="section-title">Cast-Iron Drum Alchemy</h2>
+        <p style="color: var(--coffee-text-muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+          At our Siem Reap roastery lab located near the ancient temple city, coffee roasting is approached with mindful reverence. We use 12kg restored cast-iron drum roasters that provide radiant, conductible heat with unparalleled gentleness.
+        </p>
+        <p style="color: var(--coffee-text-muted); font-size: 1.05rem; line-height: 1.7;">
+          Every bean possesses a distinct voice. By tailoring the rate-of-rise (RoR) throughout the first crack and maillard phase, we preserve delicate jasmine and wild honey aromatics while coaxing out the velvety, dark chocolate body Cambodia is famous for.
+        </p>
+      </div>
+      <div class="story-img-box">
+        <img src="https://images.unsplash.com/photo-1518832553480-cd0e625ed3e6?auto=format&fit=crop&w=800&q=80" alt="Coffee Roasting Drum">
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div style="text-align: center; background: #faf6f1; border: 1px solid var(--coffee-border); border-radius: var(--radius-xl); padding: 3.5rem 2rem;">
+      <h2 style="font-size: 2.2rem; margin-bottom: 1rem;">Taste The Sacred Terroir Today</h2>
+      <p style="color: var(--coffee-text-muted); max-width: 550px; margin: 0 auto 2rem;">
+        Roasted fresh weekly and delivered worldwide with our 48-hour freshness guarantee.
+      </p>
+      <a href="shop.html" class="btn btn-primary btn-large">
+        <i class="fa-solid fa-compass"></i> Explore Our Fresh Roasts
+      </a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-bottom" style="border: none; padding: 0;">
+      <div>&copy; 2026 Angkor Coffee Roasters Co., Ltd. Siem Reap & Phnom Penh.</div>
+      <div class="payment-badges">
+        <i class="fa-brands fa-cc-visa"></i>
+        <i class="fa-brands fa-cc-mastercard"></i>
+        <i class="fa-solid fa-qrcode"></i>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Slide-Out Shopping Cart Drawer -->
+  <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="drawer-header">
+      <h3><i class="fa-solid fa-bag-shopping text-gold"></i> Your Coffee Bag</h3>
+      <button class="drawer-close-btn" id="cartDrawerCloseBtn">&times;</button>
+    </div>
+    <div class="free-shipping-progress" id="freeShippingProgress"></div>
+    <div class="drawer-body" id="cartDrawerItems"></div>
+  </aside>
+
+  <div id="toastNotificationContainer" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

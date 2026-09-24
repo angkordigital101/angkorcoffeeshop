@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Checkout | Angkor Coffee Roasters</title>
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .checkout-header {
+      background: var(--coffee-950);
+      color: #fff;
+      padding: 1.25rem 0;
+      border-bottom: 2px solid var(--coffee-gold);
+    }
+    .checkout-header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .checkout-layout {
+      display: grid;
+      grid-template-columns: 1.35fr 0.85fr;
+      gap: 3.5rem;
+      padding: 3rem 0 5rem;
+    }
+    .checkout-form-section {
+      background: #ffffff;
+      border-radius: var(--radius-xl);
+      border: 1px solid #ebe2d7;
+      padding: 2.25rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+    }
+    .checkout-form-section h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      color: var(--coffee-900);
+      border-bottom: 1px solid #f2ede6;
+      padding-bottom: 0.75rem;
+    }
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .checkout-field {
+      margin-bottom: 1rem;
+    }
+    .checkout-field label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--coffee-700);
+      margin-bottom: 0.35rem;
+    }
+    .checkout-field input, .checkout-field select {
+      width: 100%;
+      padding: 0.75rem 0.95rem;
+      border: 1px solid #d9d0c5;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      background: #fdfbf9;
+    }
+    .checkout-field input:focus, .checkout-field select:focus {
+      border-color: var(--coffee-gold);
+      background: #fff;
+    }
+    .payment-option-card {
+      border: 1.5px solid #dcd3c8;
+      border-radius: var(--radius-md);
+      padding: 1.15rem;
+      margin-bottom: 0.85rem;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .payment-option-card:hover, .payment-option-card.active {
+      border-color: var(--coffee-gold);
+      background: #faf6f1;
+    }
+    .payment-option-card input {
+      accent-color: var(--coffee-gold);
+    }
+    .payment-option-content {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .payment-icons-strip {
+      display: flex;
+      gap: 0.4rem;
+      font-size: 1.3rem;
+      color: var(--coffee-text-muted);
+    }
+
+    /* Checkout Order Summary */
+    .checkout-summary-card {
+      background: #ffffff;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--coffee-border);
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      height: fit-content;
+      position: sticky;
+      top: 30px;
+    }
+    .checkout-item-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid #f2ece4;
+    }
+    .checkout-item-img {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
+      border: 1px solid #e5dcce;
+    }
+    .checkout-item-meta {
+      flex: 1;
+    }
+    .checkout-item-meta strong {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--coffee-900);
+    }
+    .checkout-item-meta span {
+      font-size: 0.75rem;
+      color: var(--coffee-text-muted);
+    }
+
+    /* KHQR Simulation Modal */
+    .khqr-modal-container {
+      background: #fff;
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--shadow-dark);
+      border: 2px solid #e11d48;
+    }
+    .khqr-header {
+      background: #e11d48;
+      color: #fff;
+      padding: 0.65rem 1rem;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+    }
+    .khqr-qr-box {
+      width: 220px;
+      height: 220px;
+      margin: 0 auto 1.5rem;
+      background: #ffffff;
+      border: 2px dashed #e11d48;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Success Receipt Modal */
+    .success-modal-card {
+      background: #ffffff;
+      border-radius: var(--radius-xl);
+      padding: 3rem 2.5rem;
+      max-width: 580px;
+      width: 100%;
+      text-align: center;
+      border: 2px solid #10b981;
+      box-shadow: var(--shadow-dark);
+    }
+    .success-icon-wrap {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: #ecfdf5;
+      color: #10b981;
+      font-size: 2.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.25rem;
+    }
+
+    @media (max-width: 900px) {
+      .checkout-layout {
+        grid-template-columns: 1fr;
+      }
+      .form-grid-2 {
+        grid-template-columns: 1fr;
+      }
+      .checkout-summary-card {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body style="background: #f8f5f0;">
+
+  <!-- Simple Checkout Header -->
+  <header class="checkout-header">
+    <div class="container checkout-header-inner">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon-wrap"><i class="fa-solid fa-mug-hot"></i></div>
+        <div class="brand-text">
+          <span class="brand-title">ANGKOR <span>COFFEE</span></span>
+          <span class="brand-tagline">Artisan Roastery • Checkout</span>
+        </div>
+      </a>
+      <div style="display: flex; align-items: center; gap: 1rem; font-size: 0.85rem; color: var(--coffee-crema);">
+        <i class="fa-solid fa-lock text-gold"></i>
+        <span>256-Bit SSL Encrypted Dispatch</span>
+        <a href="cart.html" style="color: var(--coffee-gold-light); margin-left: 1rem;">
+          <i class="fa-solid fa-arrow-left"></i> Return to Bag
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Checkout Main Container -->
+  <main class="container">
+    <form id="checkoutForm" onsubmit="handlePlaceOrder(event)" class="checkout-layout">
+      <!-- Left Column: Customer & Delivery Details -->
+      <div>
+        <!-- Section 1: Customer Info -->
+        <div class="checkout-form-section">
+          <h3><i class="fa-regular fa-envelope text-gold"></i> 1. Contact Information</h3>
+          <div class="checkout-field">
+            <label for="custEmail">Email Address (for fresh roast tracking):</label>
+            <input type="email" id="custEmail" required placeholder="channary@example.com">
+          </div>
+          <div class="checkout-field">
+            <label for="custPhone">Phone Number (Telegram / WhatsApp available):</label>
+            <input type="tel" id="custPhone" required placeholder="+855 12 345 678">
+          </div>
+        </div>
+
+        <!-- Section 2: Delivery Address -->
+        <div class="checkout-form-section">
+          <h3><i class="fa-solid fa-location-dot text-gold"></i> 2. Delivery Destination</h3>
+          <div class="form-grid-2">
+            <div class="checkout-field">
+              <label for="firstName">First Name:</label>
+              <input type="text" id="firstName" required placeholder="Dara">
+            </div>
+            <div class="checkout-field">
+              <label for="lastName">Last Name:</label>
+              <input type="text" id="lastName" required placeholder="Chan">
+            </div>
+          </div>
+          <div class="checkout-field">
+            <label for="streetAddress">Street Address / House # / Village:</label>
+            <input type="text" id="streetAddress" required placeholder="Street 240, Daun Penh">
+          </div>
+          <div class="form-grid-2">
+            <div class="checkout-field">
+              <label for="citySelect">City / Province:</label>
+              <select id="citySelect" required>
+                <option value="Siem Reap" selected>Siem Reap (Roastery Hub)</option>
+                <option value="Phnom Penh">Phnom Penh (Same-Day Express)</option>
+                <option value="Battambang">Battambang</option>
+                <option value="Sihanoukville">Sihanoukville / Coastal</option>
+                <option value="Kampot">Kampot & Kep</option>
+                <option value="Mondulkiri">Mondulkiri (Highland Origin)</option>
+                <option value="International">International (Worldwide DHL)</option>
+              </select>
+            </div>
+            <div class="checkout-field">
+              <label for="postalCode">Postal Code (Optional):</label>
+              <input type="text" id="postalCode" placeholder="12000">
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Delivery Speed -->
+        <div class="checkout-form-section">
+          <h3><i class="fa-solid fa-truck-fast text-gold"></i> 3. Delivery Method</h3>
+          <label class="payment-option-card active" onclick="selectDeliverySpeed('standard')">
+            <input type="radio" name="deliverySpeed" value="standard" checked>
+            <div class="payment-option-content">
+              <div>
+                <strong>Standard Fresh Dispatch (2-3 Business Days)</strong>
+                <span style="display: block; font-size: 0.78rem; color: var(--coffee-text-muted);">Small-batch roasted, rested 24h, and couriered</span>
+              </div>
+              <span id="deliveryPriceTag" style="font-weight: 700; color: var(--coffee-900);">$4.50</span>
+            </div>
+          </label>
+          <label class="payment-option-card" onclick="selectDeliverySpeed('express')">
+            <input type="radio" name="deliverySpeed" value="express">
+            <div class="payment-option-content">
+              <div>
+                <strong>Siem Reap / Phnom Penh Same-Day Roastery Express</strong>
+                <span style="display: block; font-size: 0.78rem; color: var(--coffee-gold-hover);">Delivered warm from the roast cooling tray today</span>
+              </div>
+              <span style="font-weight: 700; color: var(--coffee-900);">$6.50</span>
+            </div>
+          </label>
+        </div>
+
+        <!-- Section 4: Payment Method -->
+        <div class="checkout-form-section">
+          <h3><i class="fa-solid fa-credit-card text-gold"></i> 4. Payment Method</h3>
+          
+          <!-- Option ABA PAY KHQR -->
+          <label class="payment-option-card active" id="payOptABA" onclick="selectPaymentMethod('khqr')">
+            <input type="radio" name="paymentMethod" value="khqr" checked>
+            <div class="payment-option-content">
+              <div>
+                <strong>ABA PAY / Bakong KHQR (Cambodia QR)</strong>
+                <span style="display: block; font-size: 0.78rem; color: var(--coffee-text-muted);">Instant scan with ABA Mobile, Bakong, Wing, or ACLEDA</span>
+              </div>
+              <div class="payment-icons-strip">
+                <i class="fa-solid fa-qrcode" style="color: #e11d48;"></i>
+              </div>
+            </div>
+          </label>
+
+          <!-- Option Credit Card -->
+          <label class="payment-option-card" id="payOptCard" onclick="selectPaymentMethod('card')">
+            <input type="radio" name="paymentMethod" value="card">
+            <div class="payment-option-content">
+              <div>
+                <strong>Credit / Debit Card</strong>
+                <span style="display: block; font-size: 0.78rem; color: var(--coffee-text-muted);">Visa, MasterCard, JCB, or American Express</span>
+              </div>
+              <div class="payment-icons-strip">
+                <i class="fa-brands fa-cc-visa"></i>
+                <i class="fa-brands fa-cc-mastercard"></i>
+              </div>
+            </div>
+          </label>
+
+          <!-- Simulated Card Input Fields (hidden by default) -->
+          <div id="cardDetailsBox" style="display: none; background: #faf6f1; border-radius: var(--radius-sm); padding: 1.25rem; margin-bottom: 1rem; border: 1px solid #e0d5c8;">
+            <div class="checkout-field">
+              <label>Cardholder Name:</label>
+              <input type="text" placeholder="DARA CHAN">
+            </div>
+            <div class="checkout-field">
+              <label>Card Number:</label>
+              <input type="text" placeholder="4242 •••• •••• 4242" maxlength="19">
+            </div>
+            <div class="form-grid-2">
+              <div class="checkout-field">
+                <label>Expiry (MM/YY):</label>
+                <input type="text" placeholder="10/28" maxlength="5">
+              </div>
+              <div class="checkout-field">
+                <label>CVV / CVC:</label>
+                <input type="text" placeholder="888" maxlength="4">
+              </div>
+            </div>
+          </div>
+
+          <!-- Option Cash on Delivery -->
+          <label class="payment-option-card" id="payOptCOD" onclick="selectPaymentMethod('cod')">
+            <input type="radio" name="paymentMethod" value="cod">
+            <div class="payment-option-content">
+              <div>
+                <strong>Cash on Delivery (COD)</strong>
+                <span style="display: block; font-size: 0.78rem; color: var(--coffee-text-muted);">Pay the driver in USD or Cambodian Riel when beans arrive</span>
+              </div>
+              <div class="payment-icons-strip">
+                <i class="fa-solid fa-money-bill-wave" style="color: #059669;"></i>
+              </div>
+            </div>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-large btn-block" style="padding: 1.25rem; font-size: 1.15rem;">
+          <i class="fa-solid fa-check"></i> Complete & Roast My Order
+        </button>
+      </div>
+
+      <!-- Right Column: Order Review -->
+      <aside>
+        <div class="checkout-summary-card">
+          <h3 style="font-size: 1.3rem; margin-bottom: 1rem; border-bottom: 1px solid #eae2d8; padding-bottom: 0.75rem;">
+            Order Review (<span id="checkoutTotalCount">0</span> Items)
+          </h3>
+
+          <div id="checkoutItemsList" style="max-height: 280px; overflow-y: auto; margin-bottom: 1.25rem;">
+            <!-- Rendered dynamically -->
+          </div>
+
+          <div style="border-top: 1px solid #f0e8de; padding-top: 1rem; margin-top: 1rem;">
+            <div class="summary-line">
+              <span>Subtotal:</span>
+              <strong id="coSubtotal">$0.00</strong>
+            </div>
+            <div class="summary-line" id="coDiscountRow" style="display: none; color: #10b981;">
+              <span>Discount Promo:</span>
+              <strong id="coDiscount">-$0.00</strong>
+            </div>
+            <div class="summary-line">
+              <span>Fresh Shipping:</span>
+              <strong id="coShipping">$4.50</strong>
+            </div>
+            <div class="summary-line total">
+              <span>Grand Total:</span>
+              <strong id="coGrandTotal">$0.00</strong>
+            </div>
+          </div>
+
+          <div style="margin-top: 1.5rem; background: #faf6f1; border-radius: var(--radius-sm); padding: 1rem; font-size: 0.8rem; color: var(--coffee-text-muted);">
+            <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.4rem; color: var(--coffee-900); font-weight: 700;">
+              <i class="fa-solid fa-certificate text-gold"></i> Angkor Roastery Promise
+            </div>
+            If your coffee is not intensely aromatic and freshly roasted to perfection, we will gladly replace your batch free of charge.
+          </div>
+        </div>
+      </aside>
+    </form>
+  </main>
+
+  <!-- Simulated ABA PAY KHQR Modal -->
+  <div id="khqrModal" class="angkor-modal-overlay">
+    <div class="khqr-modal-container animate-scale-up">
+      <div class="khqr-header">
+        <i class="fa-solid fa-qrcode"></i> ABA PAY • BAKONG KHQR
+      </div>
+      <p style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--coffee-text-muted);">
+        Scan with <strong>ABA Mobile, Bakong, Wing, ACLEDA</strong> or any Cambodian banking app:
+      </p>
+      <div class="khqr-qr-box">
+        <i class="fa-solid fa-qrcode" style="font-size: 140px; color: #1e293b;"></i>
+        <span style="font-size: 0.72rem; font-weight: 700; color: #e11d48; margin-top: 0.5rem;">ANGKOR COFFEE ROASTERS</span>
+      </div>
+      <div style="font-size: 1.35rem; font-weight: 800; color: #1e293b; margin-bottom: 1rem;" id="khqrAmountDisplay">
+        $0.00
+      </div>
+      <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 1.5rem;">
+        Merchant: Angkor Coffee Roasters Co., Ltd.<br>Account: 001 889 421 (USD)
+      </p>
+      <button class="btn btn-primary btn-block" onclick="completeOrderSuccess()">
+        <i class="fa-solid fa-circle-check"></i> I Have Completed the Transfer
+      </button>
+    </div>
+  </div>
+
+  <!-- Order Placed Success Modal -->
+  <div id="orderSuccessModal" class="angkor-modal-overlay">
+    <div class="success-modal-card animate-scale-up">
+      <div class="success-icon-wrap">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <span class="section-eyebrow" style="color: #10b981;">Order Confirmed & Scheduled for Roasting</span>
+      <h2 style="font-size: 1.85rem; margin: 0.5rem 0;" id="successOrderNumber">Batch Order #AK-9481</h2>
+      <p style="color: var(--coffee-text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+        Thank you for honoring Cambodian highland coffee! Our Master Roasters are queuing your batch for cast-iron drum roasting.
+      </p>
+
+      <div style="background: #faf6f1; border-radius: var(--radius-md); padding: 1.25rem; text-align: left; margin-bottom: 1.75rem; border: 1px solid #ebe2d7; font-size: 0.88rem;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+          <span style="color: var(--coffee-text-muted);">Estimated Roast Date:</span>
+          <strong>Tomorrow, 8:00 AM</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+          <span style="color: var(--coffee-text-muted);">Estimated Delivery:</span>
+          <strong>2 - 3 Days via Courier</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+          <span style="color: var(--coffee-text-muted);">Dispatch Destination:</span>
+          <strong id="successDestinationText">Siem Reap</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; border-top: 1px solid #e2d9cd; padding-top: 0.4rem; margin-top: 0.4rem;">
+          <span>Total Paid:</span>
+          <strong id="successTotalPaid" style="color: var(--coffee-900); font-size: 1.05rem;">$0.00</strong>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; justify-content: center;">
+        <button class="btn btn-outline" onclick="window.print()">
+          <i class="fa-solid fa-print"></i> Print Invoice Receipt
+        </button>
+        <a href="index.html" class="btn btn-primary" onclick="cartService.clearCart()">
+          <i class="fa-solid fa-house"></i> Return to Homepage
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastNotificationContainer" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+
+  <script>
+    let currentSelectedPayment = 'khqr';
+    let deliverySpeedExtra = 0;
+
+    function renderCheckoutReview() {
+      const itemsList = document.getElementById('checkoutItemsList');
+      const countEl = document.getElementById('checkoutTotalCount');
+      
+      const subtotal = cartService.getSubtotal();
+      const discount = cartService.getDiscountAmount();
+      let shipping = cartService.getShippingFee() + deliverySpeedExtra;
+      const total = Math.max(0, subtotal - discount + shipping);
+
+      if (countEl) countEl.textContent = cartService.getTotalItemsCount();
+
+      if (itemsList) {
+        if (cartService.cart.length === 0) {
+          itemsList.innerHTML = `<div style="text-align: center; padding: 2rem 0; color: var(--coffee-text-muted);">Your bag is empty. Please add coffee before checking out.</div>`;
+        } else {
+          itemsList.innerHTML = cartService.cart.map(item => `
+            <div class="checkout-item-row">
+              <img src="${item.image}" alt="${item.name}" class="checkout-item-img">
+              <div class="checkout-item-meta">
+                <strong>${item.name}</strong>
+                <span>${item.weight} • ${item.grind} • Qty: ${item.quantity}</span>
+              </div>
+              <div style="font-weight: 700; font-size: 0.95rem;">
+                ${cartService.formatPrice(item.unitPrice * item.quantity)}
+              </div>
+            </div>
+          `).join('');
+        }
+      }
+
+      document.getElementById('coSubtotal').textContent = cartService.formatPrice(subtotal);
+
+      const discountRow = document.getElementById('coDiscountRow');
+      const discountEl = document.getElementById('coDiscount');
+      if (discount > 0) {
+        discountRow.style.display = 'flex';
+        discountEl.textContent = `-${cartService.formatPrice(discount)}`;
+      } else {
+        discountRow.style.display = 'none';
+      }
+
+      document.getElementById('coShipping').textContent = shipping === 0 ? 'FREE' : cartService.formatPrice(shipping);
+      document.getElementById('coGrandTotal').textContent = cartService.formatPrice(total);
+      
+      const khqrDisplay = document.getElementById('khqrAmountDisplay');
+      if (khqrDisplay) khqrDisplay.textContent = cartService.formatPrice(total);
+    }
+
+    function selectPaymentMethod(method) {
+      currentSelectedPayment = method;
+      document.querySelectorAll('.payment-option-card').forEach(c => c.classList.remove('active'));
+      
+      if (method === 'khqr') {
+        document.getElementById('payOptABA')?.classList.add('active');
+        document.getElementById('cardDetailsBox').style.display = 'none';
+      } else if (method === 'card') {
+        document.getElementById('payOptCard')?.classList.add('active');
+        document.getElementById('cardDetailsBox').style.display = 'block';
+      } else if (method === 'cod') {
+        document.getElementById('payOptCOD')?.classList.add('active');
+        document.getElementById('cardDetailsBox').style.display = 'none';
+      }
+    }
+
+    function selectDeliverySpeed(type) {
+      deliverySpeedExtra = type === 'express' ? 2.00 : 0;
+      renderCheckoutReview();
+    }
+
+    function handlePlaceOrder(e) {
+      e.preventDefault();
+      if (cartService.cart.length === 0) {
+        alert('Your coffee bag is empty! Please add some roasts before checkout.');
+        window.location.href = 'shop.html';
+        return;
+      }
+
+      const total = cartService.getFinalTotal() + deliverySpeedExtra;
+
+      if (currentSelectedPayment === 'khqr') {
+        // Show simulated ABA PAY KHQR modal
+        document.getElementById('khqrModal').classList.add('active');
+      } else {
+        completeOrderSuccess();
+      }
+    }
+
+    function completeOrderSuccess() {
+      // Close KHQR modal if open
+      document.getElementById('khqrModal')?.classList.remove('active');
+
+      const randNum = Math.floor(1000 + Math.random() * 9000);
+      const orderId = `AK-2026-${randNum}`;
+      const city = document.getElementById('citySelect')?.value || 'Cambodia';
+      const grandTotal = document.getElementById('coGrandTotal')?.textContent || '$0.00';
+
+      document.getElementById('successOrderNumber').textContent = `Roast Batch Order #${orderId}`;
+      document.getElementById('successDestinationText').textContent = city;
+      document.getElementById('successTotalPaid').textContent = grandTotal;
+
+      document.getElementById('orderSuccessModal').classList.add('active');
+      cartService.clearCart();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCheckoutReview();
+      window.addEventListener('angkor_currency_changed', renderCheckoutReview);
+    });
+  </script>
+</body>
+</html>

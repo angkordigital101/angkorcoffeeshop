@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artisan Roast Detail | Angkor Coffee Roasters</title>
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .breadcrumb-nav {
+      background: #faf6f1;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid #eae2d8;
+      font-size: 0.85rem;
+      color: var(--coffee-text-muted);
+    }
+    .breadcrumb-nav a:hover {
+      color: var(--coffee-gold);
+    }
+    .breadcrumb-separator {
+      margin: 0 0.5rem;
+      color: #c4b5a8;
+    }
+
+    .product-detail-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 3.5rem;
+      padding: 3.5rem 0 4.5rem;
+    }
+
+    .detail-gallery {
+      position: sticky;
+      top: 90px;
+    }
+
+    .detail-main-img-box {
+      position: relative;
+      height: 480px;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      border: 1px solid var(--coffee-border);
+      box-shadow: var(--shadow-md);
+      background: #140c07;
+      margin-bottom: 1.25rem;
+    }
+
+    .detail-main-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .detail-origin-badges {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      background: #ffffff;
+      padding: 1.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid #ebe2d7;
+      text-align: center;
+    }
+
+    .badge-icon-item i {
+      color: var(--coffee-gold);
+      font-size: 1.25rem;
+      margin-bottom: 0.25rem;
+      display: block;
+    }
+
+    .badge-icon-item strong {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--coffee-900);
+    }
+
+    .badge-icon-item span {
+      font-size: 0.75rem;
+      color: var(--coffee-text-muted);
+    }
+
+    /* Product Purchase Box */
+    .detail-info-header {
+      border-bottom: 1px solid #ebe2d7;
+      padding-bottom: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .detail-title {
+      font-size: 2.35rem;
+      margin: 0.5rem 0;
+    }
+
+    .detail-price-box {
+      display: flex;
+      align-items: baseline;
+      gap: 1.25rem;
+      margin: 1rem 0;
+    }
+
+    .detail-price {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--coffee-900);
+      font-family: var(--font-sans);
+    }
+
+    .subscribe-card-toggle {
+      border: 1.5px solid #d9d0c5;
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      background: #faf6f1;
+    }
+
+    .sub-option-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      font-size: 0.95rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .sub-option-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .sub-option-row input {
+      accent-color: var(--coffee-gold);
+      transform: scale(1.15);
+    }
+
+    .tab-nav-row {
+      display: flex;
+      border-bottom: 2px solid #eae2d8;
+      margin-top: 3.5rem;
+      gap: 2rem;
+      overflow-x: auto;
+    }
+
+    .tab-nav-btn {
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--coffee-text-muted);
+      padding: 0.85rem 0;
+      position: relative;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .tab-nav-btn.active {
+      color: var(--coffee-900);
+    }
+
+    .tab-nav-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--coffee-gold);
+    }
+
+    .tab-content-panel {
+      display: none;
+      padding: 2.5rem 0;
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    .tab-content-panel.active {
+      display: block;
+    }
+
+    @media (max-width: 900px) {
+      .product-detail-layout {
+        grid-template-columns: 1fr;
+      }
+      .detail-gallery {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar">
+    <div class="container announcement-inner">
+      <div class="announcement-msg">
+        <i class="fa-solid fa-fire text-gold"></i>
+        <span><strong>Fresh Roast Guarantee:</strong> Small-batch roasted within 48h of dispatch</span>
+      </div>
+      <div class="announcement-actions">
+        <div class="currency-switcher">
+          <span style="font-size: 0.75rem;">Currency:</span>
+          <button class="currency-toggle-btn active" data-currency="USD">USD ($)</button>
+          <button class="currency-toggle-btn" data-currency="KHR">KHR (៛)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon-wrap"><i class="fa-solid fa-mug-hot"></i></div>
+        <div class="brand-text">
+          <span class="brand-title">ANGKOR <span>COFFEE</span></span>
+          <span class="brand-tagline">Artisan Roastery • Cambodia</span>
+        </div>
+      </a>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="shop.html" class="nav-link">Shop Roasts</a>
+        <a href="index.html#roastingRitual" class="nav-link">Our Roast Ritual</a>
+        <a href="index.html#quizSection" class="nav-link">Flavor Quiz</a>
+        <a href="index.html#clubSection" class="nav-link">Subscription</a>
+        <a href="story.html" class="nav-link">Our Story</a>
+        <a href="contact.html" class="nav-link">Tasting Room</a>
+      </nav>
+
+      <div class="header-utilities">
+        <div class="cart-btn-wrap">
+          <button class="header-icon-btn open-cart-btn" title="View Bag">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span class="cart-badge">0</span>
+          </button>
+        </div>
+        <button class="mobile-toggle-btn" id="mobileNavToggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumb-nav">
+    <div class="container">
+      <a href="index.html">Home</a>
+      <span class="breadcrumb-separator"><i class="fa-solid fa-chevron-right"></i></span>
+      <a href="shop.html">Shop Roasts</a>
+      <span class="breadcrumb-separator"><i class="fa-solid fa-chevron-right"></i></span>
+      <span id="breadcrumbCurrent" style="color: var(--coffee-900); font-weight: 600;">Mondulkiri Peaberry Reserve</span>
+    </div>
+  </nav>
+
+  <!-- Product Detail Section -->
+  <main class="container">
+    <div class="product-detail-layout">
+      <!-- Media Gallery -->
+      <div class="detail-gallery">
+        <div class="detail-main-img-box">
+          <img id="detailMainImg" src="" alt="Roast Packaging" class="detail-main-img">
+          <span id="detailBadge" class="product-badge" style="top: 1.5rem; left: 1.5rem;"></span>
+        </div>
+
+        <div class="detail-origin-badges">
+          <div class="badge-icon-item">
+            <i class="fa-solid fa-mountain-sun"></i>
+            <strong id="badgeAltitude">950m - 1,100m</strong>
+            <span>Elevation</span>
+          </div>
+          <div class="badge-icon-item">
+            <i class="fa-solid fa-seedling"></i>
+            <strong id="badgeProcess">Wild Honey</strong>
+            <span>Process</span>
+          </div>
+          <div class="badge-icon-item">
+            <i class="fa-solid fa-fire"></i>
+            <strong id="badgeRoastLevel">Medium Roast</strong>
+            <span>Roast Density</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Purchasing Details -->
+      <div class="detail-info">
+        <div class="detail-info-header">
+          <div style="display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.35rem;">
+            <span id="detailOriginText" style="color: var(--coffee-gold-hover); font-weight: 600; font-size: 0.88rem;"></span>
+            <div id="detailFlames" class="flames-sm"></div>
+          </div>
+          <h1 class="detail-title" id="detailTitle"></h1>
+          <p id="detailTagline" style="color: var(--coffee-text-muted); font-size: 1.05rem;"></p>
+
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-top: 0.75rem;">
+            <div class="stars" id="detailStars" style="color: var(--star-gold); display: flex;"></div>
+            <span style="font-weight: 700;" id="detailRating"></span>
+            <span style="color: var(--coffee-text-muted);" id="detailReviewsCount"></span>
+          </div>
+        </div>
+
+        <div class="detail-price-box">
+          <div class="detail-price" id="detailPriceDisplay">$16.50</div>
+          <div class="freshness-guarantee">
+            <i class="fa-solid fa-shield-halved"></i> Roasted within 48h of shipping
+          </div>
+        </div>
+
+        <!-- Sensory Profile Bars -->
+        <div class="sensory-bars">
+          <div class="sensory-item">
+            <span class="sensory-label">Sweetness / Sucrose</span>
+            <div class="bar-track"><div class="bar-fill" id="sensorySweetness" style="width: 80%"></div></div>
+          </div>
+          <div class="sensory-item">
+            <span class="sensory-label">Body / Viscosity</span>
+            <div class="bar-track"><div class="bar-fill" id="sensoryBody" style="width: 80%"></div></div>
+          </div>
+          <div class="sensory-item">
+            <span class="sensory-label">Acidity / Brightness</span>
+            <div class="bar-track"><div class="bar-fill" id="sensoryAcidity" style="width: 60%"></div></div>
+          </div>
+        </div>
+
+        <!-- Tasting Notes Tags -->
+        <div style="margin-bottom: 1.5rem;">
+          <strong style="display: block; font-size: 0.82rem; margin-bottom: 0.5rem; text-transform: uppercase; color: var(--coffee-700);">
+            Identified Cupping Notes:
+          </strong>
+          <div class="tasting-notes-pills" id="detailNotesPills"></div>
+        </div>
+
+        <!-- Purchase Form -->
+        <form id="detailPurchaseForm" onsubmit="handleDetailAddToCart(event)">
+          <!-- One-time vs Subscribe -->
+          <div class="subscribe-card-toggle">
+            <label class="sub-option-row">
+              <input type="radio" name="purchaseType" value="onetime" checked onchange="togglePurchaseType('onetime')">
+              <div>
+                <strong>One-Time Delivery</strong>
+                <span style="display: block; font-size: 0.78rem; color: var(--coffee-text-muted);">Standard small-batch fresh roast</span>
+              </div>
+            </label>
+            <label class="sub-option-row">
+              <input type="radio" name="purchaseType" value="subscribe" onchange="togglePurchaseType('subscribe')">
+              <div>
+                <strong>Subscribe & Save 15% ($14.02 / bag)</strong>
+                <span style="display: block; font-size: 0.78rem; color: var(--coffee-gold-hover);">Delivered every 2 weeks • Free shipping • Cancel anytime</span>
+              </div>
+            </label>
+          </div>
+
+          <!-- Weight Pills -->
+          <div class="selector-field">
+            <label>Select Bag Size:</label>
+            <div class="weight-pills">
+              <label class="weight-option">
+                <input type="radio" name="detailWeight" value="250g" checked onchange="updateDetailPagePrice()">
+                <span>250g <em>(8.8 oz / ~16 cups)</em></span>
+              </label>
+              <label class="weight-option">
+                <input type="radio" name="detailWeight" value="500g" onchange="updateDetailPagePrice()">
+                <span>500g <em>(1.1 lb / ~32 cups)</em></span>
+              </label>
+              <label class="weight-option">
+                <input type="radio" name="detailWeight" value="1kg" onchange="updateDetailPagePrice()">
+                <span>1 kg <em>(2.2 lb / Value Bar)</em></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Grind Selector -->
+          <div class="selector-field">
+            <label for="detailGrindSelect">Select Grind Profile:</label>
+            <select id="detailGrindSelect" class="styled-select" required>
+              <option value="Whole Bean" selected>Whole Bean (Maximum Freshness)</option>
+              <option value="Pour Over (Medium)">Pour Over / V60 / Chemex (Medium)</option>
+              <option value="Espresso Fine">Espresso Machine / Moka Pot (Fine)</option>
+              <option value="Phin Traditional">Traditional Cambodian Phin (Medium-Fine)</option>
+              <option value="French Press / Cold Brew">French Press / Cold Brew (Coarse)</option>
+            </select>
+          </div>
+
+          <!-- Action Buttons -->
+          <div style="display: flex; gap: 1rem; align-items: center; margin-top: 1.5rem;">
+            <div class="qv-qty-stepper">
+              <button type="button" onclick="stepDetailQty(-1)">-</button>
+              <input type="number" id="detailQty" value="1" min="1" max="50" readonly>
+              <button type="button" onclick="stepDetailQty(1)">+</button>
+            </div>
+            <button type="submit" class="btn btn-primary btn-large" style="flex: 1;">
+              <i class="fa-solid fa-bag-shopping"></i> Add to Coffee Bag
+            </button>
+          </div>
+        </form>
+
+        <!-- Perks strip -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 2rem; border-top: 1px solid #ebe2d7; padding-top: 1.5rem; font-size: 0.8rem; color: var(--coffee-text-muted);">
+          <div><i class="fa-solid fa-box-open text-gold"></i> Foil bag with 1-way degassing valve</div>
+          <div><i class="fa-solid fa-calendar-check text-gold"></i> Stamped with Drum Batch & Date</div>
+          <div><i class="fa-solid fa-truck-fast text-gold"></i> Free delivery on orders $35+</div>
+          <div><i class="fa-solid fa-hand-holding-heart text-gold"></i> 100% Direct Fair Trade</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Information Tabs -->
+    <section>
+      <div class="tab-nav-row">
+        <button class="tab-nav-btn active" onclick="switchDetailTab('story')">Origin & Farmer Terroir</button>
+        <button class="tab-nav-btn" onclick="switchDetailTab('roast')">Master Roaster's Profile</button>
+        <button class="tab-nav-btn" onclick="switchDetailTab('brew')">Barista Brew Guide</button>
+        <button class="tab-nav-btn" onclick="switchDetailTab('reviews')">Customer Cupping Reviews</button>
+      </div>
+
+      <!-- Tab 1: Story -->
+      <div class="tab-content-panel active" id="tab-story">
+        <h3 style="font-size: 1.45rem; margin-bottom: 1rem;">Cultivated on the Misty Volcanic Ridges</h3>
+        <p id="tabStoryContent"></p>
+        <div style="background: #faf6f1; padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--coffee-border); margin-top: 1.5rem;">
+          <h4 style="color: var(--coffee-gold-hover); margin-bottom: 0.5rem;"><i class="fa-solid fa-earth-asia"></i> Direct Trade Partnership</h4>
+          <p style="font-size: 0.92rem; color: var(--coffee-text-dark); margin: 0;">
+            We work directly with Bunong ethnic tribal families in Mondulkiri. By bypassing brokers, 100% of fair premium payments go directly to local farmers, enabling community schools and sustainable shade-tree cultivation.
+          </p>
+        </div>
+      </div>
+
+      <!-- Tab 2: Roast -->
+      <div class="tab-content-panel" id="tab-roast">
+        <h3 style="font-size: 1.45rem; margin-bottom: 1rem;">Precision Drum Roasting Curve</h3>
+        <p id="tabRoastContent"></p>
+      </div>
+
+      <!-- Tab 3: Brew -->
+      <div class="tab-content-panel" id="tab-brew">
+        <h3 style="font-size: 1.45rem; margin-bottom: 1rem;">Recommended Extraction Setup</h3>
+        <p>Our head roasters tested this micro-lot across 5 brew methods. Here is our optimal gold-cup recipe:</p>
+        <div class="brew-guide-card" style="max-width: 500px; margin-top: 1rem;">
+          <div class="brew-icon"><i class="fa-solid fa-filter"></i></div>
+          <h4 id="tabBrewMethodTitle">V60 Pour Over Recipe</h4>
+          <table class="brew-specs-table">
+            <tr><td>Coffee / Water</td><td>18g / 300ml (1:16.6)</td></tr>
+            <tr><td>Water Temp</td><td>93°C (200°F)</td></tr>
+            <tr><td>Grind Profile</td><td>Medium-Fine (Coarse sand)</td></tr>
+            <tr><td>Bloom Stage</td><td>50ml water for 45 seconds</td></tr>
+            <tr><td>Total Pour Time</td><td>2 minutes 45 seconds</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 4: Reviews -->
+      <div class="tab-content-panel" id="tab-reviews">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+          <h3 style="font-size: 1.45rem; margin: 0;">Community Cupping Reviews</h3>
+          <button class="btn btn-primary" onclick="openReviewModal()"><i class="fa-solid fa-pen"></i> Write a Roast Review</button>
+        </div>
+        <div class="reviews-grid" id="detailReviewsGrid">
+          <!-- Sample verified review -->
+          <div class="review-card">
+            <div>
+              <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+              <p class="review-quote">"Unbelievable natural sweetness. You can really taste the wild honey and toasted nuts. The roast freshness was evident right upon unsealing the valve."</p>
+            </div>
+            <div class="review-author">
+              <div class="author-info"><strong>Rithy Sok</strong><span><i class="fa-solid fa-circle-check"></i> Verified Buyer • Phnom Penh</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Roasts -->
+    <section class="section-padding" style="border-top: 1px solid #ebe2d7; margin-top: 3rem;">
+      <div class="section-header">
+        <span class="section-eyebrow">Discover More Terroir</span>
+        <h2 class="section-title">You Might Also Savor</h2>
+      </div>
+      <div class="roasts-grid" id="relatedRoastsGrid"></div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-bottom" style="border: none; padding: 0;">
+      <div>&copy; 2026 Angkor Coffee Roasters Co., Ltd. Siem Reap & Phnom Penh.</div>
+      <div class="payment-badges">
+        <i class="fa-brands fa-cc-visa"></i>
+        <i class="fa-brands fa-cc-mastercard"></i>
+        <i class="fa-brands fa-cc-apple-pay"></i>
+        <i class="fa-solid fa-qrcode"></i>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Slide-Out Shopping Cart Drawer -->
+  <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="drawer-header">
+      <h3><i class="fa-solid fa-bag-shopping text-gold"></i> Your Coffee Bag</h3>
+      <button class="drawer-close-btn" id="cartDrawerCloseBtn">&times;</button>
+    </div>
+    <div class="free-shipping-progress" id="freeShippingProgress"></div>
+    <div class="drawer-body" id="cartDrawerItems"></div>
+    <div class="drawer-footer" id="cartDrawerFooter">
+      <form class="drawer-coupon-form" id="drawerCouponForm">
+        <input type="text" placeholder="Promo code (e.g. ANGKOR10)" id="drawerCouponInput">
+        <button type="submit" class="btn btn-secondary">Apply</button>
+      </form>
+      <div id="drawerAppliedCoupon" class="applied-coupon-tag" style="display: none;"></div>
+      <div class="drawer-summary-rows">
+        <div class="summary-row"><span>Subtotal:</span><span id="drawerSubtotal">$0.00</span></div>
+        <div class="summary-row" id="drawerDiscountRow" style="display: none; color: #10b981;"><span>Discount:</span><span id="drawerDiscount">-$0.00</span></div>
+        <div class="summary-row"><span>Fresh Delivery:</span><span id="drawerShipping">$4.50</span></div>
+        <div class="summary-row total-row"><span>Total:</span><span id="drawerTotal">$0.00</span></div>
+      </div>
+      <div class="drawer-actions">
+        <a href="checkout.html" class="btn btn-primary btn-block btn-large">
+          <i class="fa-solid fa-lock"></i> Secure Checkout
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <div id="toastNotificationContainer" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    let currentProduct = null;
+    let isSubscribed = false;
+
+    function initProductDetailPage() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const prodId = urlParams.get('id') || 'mondulkiri-peaberry';
+      currentProduct = getProductById(prodId);
+
+      // Populate details
+      document.title = `${currentProduct.name} | Angkor Coffee Roasters`;
+      document.getElementById('breadcrumbCurrent').textContent = currentProduct.name;
+      document.getElementById('detailMainImg').src = currentProduct.image;
+      document.getElementById('detailMainImg').alt = currentProduct.name;
+      
+      const badgeEl = document.getElementById('detailBadge');
+      if (currentProduct.badge) {
+        badgeEl.textContent = currentProduct.badge;
+        badgeEl.className = `product-badge badge-${currentProduct.badge.toLowerCase().replace(/\s+/g, '-')}`;
+      } else {
+        badgeEl.style.display = 'none';
+      }
+
+      document.getElementById('badgeAltitude').textContent = currentProduct.altitude;
+      document.getElementById('badgeProcess').textContent = currentProduct.process;
+      document.getElementById('badgeRoastLevel').textContent = `${currentProduct.roastLevel} Roast`;
+
+      document.getElementById('detailOriginText').textContent = currentProduct.origin;
+      document.getElementById('detailFlames').innerHTML = renderRoastFlames(currentProduct.roastScore);
+      document.getElementById('detailTitle').textContent = currentProduct.name;
+      document.getElementById('detailTagline').textContent = currentProduct.tagline;
+
+      document.getElementById('detailStars').innerHTML = renderStars(currentProduct.rating);
+      document.getElementById('detailRating').textContent = currentProduct.rating;
+      document.getElementById('detailReviewsCount').textContent = `(${currentProduct.reviewsCount} verified reviews)`;
+
+      // Sensory bars
+      document.getElementById('sensorySweetness').style.width = `${currentProduct.sweetness * 20}%`;
+      document.getElementById('sensoryBody').style.width = `${currentProduct.body * 20}%`;
+      document.getElementById('sensoryAcidity').style.width = `${currentProduct.acidity * 20}%`;
+
+      // Tasting notes
+      document.getElementById('detailNotesPills').innerHTML = currentProduct.tastingNotes.map(n => `
+        <span class="note-pill" style="font-size: 0.85rem; padding: 4px 10px;"><i class="fa-solid fa-feather"></i> ${n}</span>
+      `).join('');
+
+      // Tabs content
+      document.getElementById('tabStoryContent').textContent = currentProduct.description;
+      document.getElementById('tabRoastContent').textContent = currentProduct.roastProfileNotes;
+
+      updateDetailPagePrice();
+
+      // Related products
+      const related = ANGKOR_PRODUCTS.filter(p => p.id !== currentProduct.id).slice(0, 3);
+      document.getElementById('relatedRoastsGrid').innerHTML = related.map(p => renderProductCard(p)).join('');
+    }
+
+    function updateDetailPagePrice() {
+      if (!currentProduct) return;
+      const checkedWeight = document.querySelector('input[name="detailWeight"]:checked')?.value || '250g';
+      let price = cartService.calculateItemPrice(currentProduct.basePrice, checkedWeight);
+      if (isSubscribed) {
+        price = Number((price * 0.85).toFixed(2));
+      }
+      document.getElementById('detailPriceDisplay').textContent = cartService.formatPrice(price);
+    }
+
+    function togglePurchaseType(type) {
+      isSubscribed = type === 'subscribe';
+      updateDetailPagePrice();
+    }
+
+    function stepDetailQty(delta) {
+      const input = document.getElementById('detailQty');
+      let val = parseInt(input.value, 10) || 1;
+      val = Math.max(1, val + delta);
+      input.value = val;
+    }
+
+    function handleDetailAddToCart(e) {
+      e.preventDefault();
+      if (!currentProduct) return;
+
+      const checkedWeight = document.querySelector('input[name="detailWeight"]:checked')?.value || '250g';
+      const grind = document.getElementById('detailGrindSelect')?.value || 'Whole Bean';
+      const qty = parseInt(document.getElementById('detailQty')?.value, 10) || 1;
+
+      cartService.addItem(currentProduct, checkedWeight, grind, qty, true);
+    }
+
+    function switchDetailTab(tabId) {
+      document.querySelectorAll('.tab-nav-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content-panel').forEach(panel => panel.classList.remove('active'));
+
+      event.target.classList.add('active');
+      document.getElementById(`tab-${tabId}`).classList.add('active');
+    }
+
+    function openReviewModal() {
+      const name = prompt('Enter your name:');
+      if (!name) return;
+      const reviewText = prompt('Enter your roast review:');
+      if (reviewText) {
+        cartService.showToast('Review Submitted', 'Thank you for your cupping feedback!', 'fa-solid fa-star');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', initProductDetailPage);
+  </script>
+</body>
+</html>
